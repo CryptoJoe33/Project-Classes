@@ -145,8 +145,19 @@ fid4 = open(file4, 'w')
 fid4.close()
 
 thePatients = [Patient(69, 'Dick', 'Cancer', 'man', 75), Patient(96, 'Jon', 'Cancer', 'man', 45)]
+#################################################################################################
+# Writes theDoctors to file0
+docs = Management(theDoctors)
+docs.writeListOfDoctorsToFile(file0)
 
-<<<<<<< HEAD
-Management.writeListOfPatientsToFile(file4)
-=======
->>>>>>> parent of 199befc (Writing to file)
+# Writes theFacilities to file2
+facs = Management(theFacilities)
+facs.writeListOfFacilitiesToFile(file2)
+
+# Writes theLabs to file3
+labs = Management(theLabs)
+labs.writeListOfLabsToFile(file3)
+
+# Writes thePatients to file4
+pats = Management(thePatients)
+pats.writeListOfPatientsToFile(file4)
