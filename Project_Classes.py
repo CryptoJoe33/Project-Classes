@@ -88,31 +88,31 @@ class Patient:
 
 class Management:
 
-    def __init__(self):
-        return self
+    def __init__(self, f):
+        self.file = f
 
-    def writeListOfDoctorsToFile(self):
+    def writeListOfDoctorsToFile(self, file):
         fid = open('Doctors.txt', 'a')
         for doctors in theDoctors:
-            doctors.addDrToFile(file0)
+            doctors.addDrToFile(file)
         fid.close()
 
-    def writeListOfFacilitiesToFile(self):
+    def writeListOfFacilitiesToFile(self, file):
         fid2 = open('Facilities.txt', 'a')
         for facilities in theFacilities:
-            facilities.addFacilityToFile(file2)
+            facilities.addFacilityToFile(file)
         fid2.close()
     
-    def writeListOfLabsToFile(self):
+    def writeListOfLabsToFile(self, file):
         fid3 = open('Laboratory.txt', 'a')
         for laboratories in theLabs:
-            laboratories.addLabToFile(file3)
+            laboratories.addLabToFile(file)
         fid3.close()
 
-    def writeListOfPatientsToFile(self):
+    def writeListOfPatientsToFile(self, file):
         fid4 = open('Patients.txt','a')
         for patients in thePatients:
-            patients.addPatientToFile(file4)
+            patients.addPatientToFile(file)
         fid4.close()
 
 
@@ -146,4 +146,21 @@ fid4 = open(file4, 'w')
 fid4.close()
 
 thePatients = [Patient(69, 'Dick', 'Cancer', 'man', 75), Patient(96, 'Jon', 'Cancer', 'man', 45)]
+
+#################################################################################################
+# Writes theDoctors to file0
+docs = Management(theDoctors)
+docs.writeListOfDoctorsToFile(file0)
+
+# Writes theFacilities to file2
+facs = Management(theFacilities)
+facs.writeListOfFacilitiesToFile(file2)
+
+# Writes theLabs to file3
+labs = Management(theLabs)
+labs.writeListOfLabsToFile(file3)
+
+# Writes thePatients to file4
+pats = Management(thePatients)
+pats.writeListOfPatientsToFile(file4)
 
