@@ -91,25 +91,25 @@ class Management:
     def __init__(self):
         return self
 
-    def writeListOfDoctorsToFile(self, file):
+    def writeListOfDoctorsToFile(self):
         fid = open('Doctors.txt', 'a')
         for doctors in theDoctors:
-            doctors.addDrToFile(file)
+            doctors.addDrToFile(file0)
         fid.close()
 
-    def writeListOfFacilitiesToFile(self, file):
+    def writeListOfFacilitiesToFile(self):
         fid2 = open('Facilities.txt', 'a')
         for facilities in theFacilities:
-            facilities.addFacilityToFile(file)
+            facilities.addFacilityToFile(file2)
         fid2.close()
     
-    def writeListOfLabsToFile(self, file):
+    def writeListOfLabsToFile(self):
         fid3 = open('Laboratory.txt', 'a')
         for laboratories in theLabs:
-            laboratories.addLabToFile(file)
+            laboratories.addLabToFile(file3)
         fid3.close()
 
-    def writeListOfPatientsToFile(self, file):
+    def writeListOfPatientsToFile(self):
         fid4 = open('Patients.txt','a')
         for patients in thePatients:
             patients.addPatientToFile(file4)
@@ -146,4 +146,7 @@ fid4.close()
 
 thePatients = [Patient(69, 'Dick', 'Cancer', 'man', 75), Patient(96, 'Jon', 'Cancer', 'man', 45)]
 
+<<<<<<< HEAD
 Management.writeListOfPatientsToFile(file4)
+=======
+>>>>>>> parent of 199befc (Writing to file)
