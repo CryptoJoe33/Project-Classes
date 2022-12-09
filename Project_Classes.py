@@ -30,13 +30,10 @@ class Facility:
         fid2.write(self.formatFacilities() + '\n')
         fid2.close()
 
-    def displayFacilities(self, file):
-        fid2 = open(file2, 'r')
-        facsAsString = fid2.readline()
-        listInfo = facsAsString.split(' ')
-        for n in listInfo:
-            print(n)
-        fid2.close()
+    def displayFacilityList(self, file):
+        fid2 = open("Facilities.txt", 'r')
+        print(fid2.read())
+        return str(self.facility_name)
 
 class Laboratory:
 
@@ -55,16 +52,14 @@ class Laboratory:
     def enterLabInfo(self):
         self.lab_name = input("Enter lab number:")
         self.cost = input("Enter cost:")
-        return self.lab_name + self.cost
-
+        fid3 = open("Labs.txt", 'a')
+        fid3.append(self.lab_name, self.cost)
+        fid3.close()
 
     def displayLabsList(self, file):
-        fid3 = open(file3, 'r')
-        labsAsString = fid3.readline()
-        listInfo = labsAsString.split('\n')
-        for n in labsAsString:
-            print(n)
-        fid3.close()
+        fid3 = open("Labs.txt", 'r')
+        print(fid3.read())
+        return str(self.lab_name) + str(self.cost)
 
 class Patient:
 
@@ -171,6 +166,8 @@ pats.writeListOfPatientsToFile(file4)
 
 ###########################################################3
 
-lab = Laboratory()
-print()
+laboratory = Laboratory('Lab3', 450)
+laboratory.displayLabsList(file3)
 
+facilities = Facility('Dining Room')
+facilities.displayFacilityList(file2)
