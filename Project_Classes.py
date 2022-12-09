@@ -52,10 +52,11 @@ class Laboratory:
         fid3.write(self.formatLabInfo() + '\n')
         fid3.close()
 
-    def enterLabInfo(file):
-        fid3 = open(file, 'a')
-        fid3.append(file)
-        fid3.close()
+    def enterLabInfo(self):
+        self.lab_name = input("Enter lab number:")
+        self.cost = input("Enter cost:")
+        return self.lab_name + self.cost
+
 
     def displayLabsList(self, file):
         fid3 = open(file3, 'r')
@@ -170,10 +171,6 @@ pats.writeListOfPatientsToFile(file4)
 
 ###########################################################3
 
-lab_name = input("Enter Lab number:\n")
-cost = input("Enter cost:\n")
+lab = Laboratory()
+print()
 
-theLabs.append(Laboratory(str(lab_name), str(cost)))
-
-for x in theLabs:
-    print(x)
