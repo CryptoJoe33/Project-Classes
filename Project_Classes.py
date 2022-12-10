@@ -53,13 +53,18 @@ class Laboratory:
         self.lab_name = input("Enter lab number:\n")
         self.cost = input("Enter cost:\n")
         fid3 = open("Labs.txt", 'a')
-        theLabs.append(file)
+        fid3.write(self.lab_name + '_' + self.cost)
         fid3.close()
 
     def displayLabsList(self, file):
         fid3 = open("Labs.txt", 'r')
         print(fid3.read())
         return str(self.lab_name) + str(self.cost)
+
+    def readLabratoriesFile(self):
+        fid3 = open("Labs.txt", 'r')
+        infoAsString = fid3.readline()
+        listInfo = infoAsString.split(' ')
 
 class Patient:
 
