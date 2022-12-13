@@ -13,7 +13,7 @@ class Doctor:
         return str(self.ID) + '_' + self.name + '_' + self.specialization + '_' + str(self.working_time) + '_' + self.qualification + '_' + str(self.room_number)
 
     def addDrToFile(self, file):
-        fid = open(file0, 'a')
+        fid = open(file, 'a')
         fid.write(self.formatDrInfo() + '\n')
         fid.close()
 
@@ -53,11 +53,20 @@ class Laboratory:
         fid3.close()
 
     def displayLabsList(self, file):
-        fid3 = open(file3, 'r')
-        labsAsString = fid3.readline()
-        listInfo = labsAsString.split(' ')
-        for n in listInfo:
-            print(n)
+        fid3 = open("Labs.txt", 'r')
+        print(fid3.read())
+        return str(self.lab_name) + str(self.cost)
+
+    def readLabratoriesFile(self):
+        fid3 = open("Labs.txt", 'r')
+        infoAsString = fid3.readline()
+        listInfo = infoAsString.split(' ')
+
+    def enterLabInfo(self, file):
+        self.lab_name = input("Enter lab number:\n")
+        self.cost = input("Enter cost:\n")
+        fid3 = open("Labs.txt", 'a')
+        theLabs.append(file)
         fid3.close()
 
 class Patient:
@@ -86,10 +95,9 @@ class Patient:
             print(n)
         fid4.close()
 
-
 class Management:
 
-    def __init__(self):
+    def __init__(self, file):
         return self
 
     def writeListOfDoctorsToFile(self, file):
@@ -113,14 +121,8 @@ class Management:
     def writeListOfPatientsToFile(self, file):
         fid4 = open('Patients.txt','a')
         for patients in thePatients:
-            patients.addPatientToFile(file4)
+            patients.addPatientToFile(file)
         fid4.close()
-
-
-
-
-
-
 
 # Clears the file from any existing data so you can put more in
 file0 = "Doctor.txt"
@@ -153,4 +155,34 @@ fid4.close()
 
 thePatients = [Patient(69, 'Dick', 'Cancer', 'man', 75), Patient(96, 'Jon', 'Cancer', 'man', 45)]
 
-Management.writeListOfPatientsToFile(file4)
+####################################################################################
+# Writes theDoctors to file0
+docs = Management(theDoctors)
+docs.writeListOfDoctorsTofile(file0)
+
+# Writes theFacilities to file2
+facs = Management(theFacilities)
+facs.writeListOfFacilitiesTofile(file2)
+
+# Writes theLabs to file3
+labs = Management(theLabs)
+labs.writeListOfLabsTofile(file3)
+
+# Writes thePatients to file4
+pats = Management(thePatients)
+pats.writeListOfPatientsTofile(file4)
+
+###########################################################
+
+# Display info to the user
+laboratory = Laboratory('Lab3', 450)
+laboratory.displayLabsList(file3)
+
+facilities = Facility('Dining room')
+facilities.displayFacilityList(file2)
+
+##############################################################
+
+# Asks user to input info
+labInfo = Laboratory('Lab4', 500)
+labInfo.enterLabInfo(file3)
