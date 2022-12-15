@@ -1,4 +1,5 @@
-Hospital 
-emergency 
-Penis 
-Operating_room
+Hospital  Facilities are:
+Ambulance
+Admissions 
+Canteen
+Emergency

@@ -1,188 +1,183 @@
-#from Classes import Doctor, Facility, Laboratory
-class Doctor:
-
-    def __init__(self, ID, n, s, w_t, q, r_n):
-        self.ID = ID
-        self.name = n
-        self.specialization = s
-        self.working_time = w_t
-        self.qualification = q
-        self.room_number = r_n
-
-    def formatDrInfo(self):
-        return str(self.ID) + '_' + self.name + '_' + self.specialization + '_' + str(self.working_time) + '_' + self.qualification + '_' + str(self.room_number)
-
-    def addDrToFile(self, file):
-        fid = open(file, 'a')
-        fid.write(self.formatDrInfo() + '\n')
-        fid.close()
-
 class Facility:
 
-    def __init__(self, f):
-        self.facility_name = f
+    def __init__(self):
+        self.labs_name = "None"
 
-    def formatFacilities(self):
-        return self.facility_name + '\n'
+    def addFacility(self):
+        self.new_file = open("facilities.txt", "r")
+        self.labs_list = self.new_file.readlines()
+        self.new_file.close()
 
-    def addFacilityToFile(self, file):
-        fid2 = open(file, 'a')
-        fid2.write(self.formatFacilities() + '\n')
-        fid2.close()
+        self.labs_name = input("Enter Facility name: \n\n")
 
-    def displayFacilities(self, file):
-        fid2 = open(file, 'r')
-        facilitiesAsString = fid2.readline()
-        listInfo = facilitiesAsString.split('_')
-        for n in listInfo:
-            print(n)
-        fid2.close()
+        self.labs_list.append(self.labs_name)
+
+        self.writeListOffacilitiesToFile(self.labs_list)
+
+    def displayFacilities(self):
+        self.new_file = open("facilities.txt", "r")
+        self.labs_list = self.new_file.readlines()
+        self.new_file.close()
+        self.labs_list[0] = "The " + self.labs_list[0]
+
+        for i in range(len(self.labs_list)):
+            if self.labs_list[i].endswith('\n') == False:
+                print(self.labs_list[i]+'\n')
+            else:
+                print(self.labs_list[i])
+
+    def writeListOffacilitiesToFile(self, write):
+        self.new_file = open("facilities.txt", "w")
+        self.index = 0
+
+        for entries in write:
+            if write[self.index].endswith('\n') == False:
+                write[self.index] = write[self.index] + '\n'
+            self.new_file.write(write[self.index])
+            self.index += 1
+        self.new_file.close()
 
 class Laboratory:
 
-    def __init__(self, l_n, c):
-        self.lab_name = l_n
-        self.cost = c
+    def __init__(self):
+        self.lab_name = "None"
+        self.cost = "None"
 
     def formatLabInfo(self):
         return str(self.lab_name) + '_' + str(self.cost)
     
-    def addLabToFile(self, file):
-        fid3 = open(file, 'a')
-        fid3.write(self.formatLabInfo() + '\n')
-        fid3.close()
+    def addLaboratory(self):
+        self.new_file = open("laboritories.txt", "r")
+        self.labs_list = self.new_file.readlines()
+        self.new_file.close()
 
-    def displayLabsList(self, file):
-        fid3 = open("Labs.txt", 'r')
-        print(fid3.read())
-        return str(self.lab_name) + str(self.cost)
+        self.labs_name = input("Enter Facility name: \n")
 
-    def readLabratoriesFile(self):
-        fid3 = open("Labs.txt", 'r')
-        infoAsString = fid3.readline()
-        listInfo = infoAsString.split(' ')
+        self.labs_list.append(self.labs_name)
 
-    def enterLabInfo(self, file):
-        self.lab_name = input("Enter lab number:\n")
-        self.cost = input("Enter cost:\n")
-        fid3 = open("Labs.txt", 'a')
-        theLabs.append(file)
-        fid3.close()
+        self.writeListOfLabsToFile(self.labs_list)
 
-class Patient:
+    def displayLabs(self):
+        self.new_file = open("laboritories.txt", "r")
+        self.labs_list = self.new_file.readlines()
+        self.new_file.close()
+        self.labs_list[0] = "The " + self.labs_list[0]
 
-    def __init__(self, pid, n, d, g, a):
-        self.pid = pid
-        self.name = n
-        self.disease = d
-        self.gender = g
-        self.age = a
+        for i in range(len(self.labs_list)):
+            if self.labs_list[i].endswith('\n') == False:
+                print(self.labs_list[i]+'\n')
+            else:
+                print(self.labs_list[i])
 
-    def formatPatientInfo(self):
-        return str(self.pid) + '_' + self.name + '_' + self.disease + '_' + self.gender + '_' + str(self.age)
+    def readLabsFile(self):
+        self.new_file = open("laboritories.txt", "r")
+        self.test_list = self.new_file.readlines()
+        self.new_file.close()
+        return self.test_list
+
+    def enterLabInfo(self):
+        self.lab_name = input("Enter the doctor's ID:\n\n")
+        self.cost = input("Enter the doctor's name:\n\n")
+        return [self.id,self.name,self.spec,self.hours,self.qual,self.room]
+
+    def writeListOfLabsToFile(self,write):
+        self.new_file = open("laboritories.txt", "w")
+        self.index = 0
+
+        for entries in write:
+            if write[self.index].endswith('\n') == False:
+                write[self.index] = write[self.index] + '\n'
+            self.new_file.write(write[self.index])
+            self.index += 1
+        self.new_file.close()
+
+Doctor = 0
+Patient = 0
+
+class Menu:
     
-    def addPatientToFile(self, file):
-        fid4 = open(file, 'a')
-        fid4.write(self.formatPatientInfo() + '\n')
-        fid4.close()
+    def Display_Menu(self):
+        self.repeat = True
+        while self.repeat:
+            self.option = input('Welcome to Alberta Hospital (AH) Managment system\nSelect from the following options, or select 0 to stop:\n1 - 	Doctors\n2 - 	Facilities\n3 - 	Laboratories\n4 - 	Patients\n\n')
+            
+            if int(self.option) == 1:
+                self.cycle = True
+                self.obj_handle = Doctor()
+                while self.cycle:
+                    self.option = input('\nDoctors Menu:\n1 - Display Doctors list\n2 - Search for doctor by ID\n3 - Search for doctor by name\n4 - Add doctor\n5 - Edit doctor info\n6 - Back to the Main Menu\n\n')
+                    if int(self.option) == 1:
+                        self.obj_handle.displayDoctorsList()
+                        print("\nBack to the prevoius Menu") 
+                    elif int(self.option) == 2:
+                        self.obj_handle.searchDoctorById()
+                        print("\nBack to the prevoius Menu") 
+                    elif int(self.option) == 3:
+                        self.obj_handle.searchDoctorByName()
+                        print("\nBack to the prevoius Menu")
+                    elif int(self.option) == 4:
+                        self.obj_handle.addDrToFile()
+                        print("\nBack to the prevoius Menu")
+                    elif int(self.option) == 5:
+                        self.obj_handle.editDoctorInfo()
+                        print("\nBack to the prevoius Menu")
+                    elif int(self.option) == 6:
+                        self.cycle = False
+                        print("")
 
-# Function will not work because there is nothing being written to the file
-    def displayPatientInfro(self, file):
-        fid4 = open(file, 'r')
-        patientAsString = fid4.readline()
-        listInfo = patientAsString.split('_')
-        for n in listInfo:
-            print(n)
-        fid4.close()
+            elif int(self.option) == 2:
+                self.cycle = True
+                self.obj_handle = Facility()
+                while self.cycle:
+                    self.option = input('Facilities Menu:\n1 - Display Facilities list\n2 - Add Facility\n3 - Back to the Main Menu\n\n')
+                    if int(self.option) == 1:
+                        self.obj_handle.displayFacilities()
+                        print("Back to the prevoius Menu") 
+                    elif int(self.option) == 2:
+                        self.obj_handle.addFacility()
+                        print("\nBack to the prevoius Menu") 
+                    elif int(self.option) == 3:
+                        self.cycle = False
+                        print("")
+            
+                    else:
+                        self.repeat = False   
 
-class Management:
+            elif int(self.option) == 3:
+                self.cycle = True
+                self.obj_handle = Laboratory()
+                while self.cycle:
+                    self.option = input('Laboratories Menu:\n1 - Display laboratories list\n2 - Add laboratory\n3 - Back to the Main Menu\n\n')
+                    if int(self.option) == 1:
+                        self.obj_handle.displayLabs()
+                    elif int(self.option) == 2:
+                        self.obj_handle.addLaboratory()
+                    elif int(self.option) == 3:
+                        self.cycle = False
+                    print("Back to the prevoius Menu\n") 
+            
+            elif int(self.option) == 4:
+                self.cycle = True
+                self.obj_handle = Patient()
+                while self.cycle:
+                    self.option = input('Patients Menu:\n1 - Display patients list\n2 - Search for patient by ID\n3 - Add patient\n4 - Edit patient info\n5 - Back to the Main Menu\n\n')
+                    if int(self.option) == 1:
+                        self.obj_handle.displayPatientsList()
+                    elif int(self.option) == 2:
+                        self.obj_handle.searchPatientById()
+                    elif int(self.option) == 3:
+                        self.obj_handle.addPatientToFile()
+                    elif int(self.option) == 4:
+                        self.obj_handle.editPatientInfo()
+                    elif int(self.option) == 5:
+                        self.cycle = False
+                    print("Back to the prevoius Menu\n")  
+        
 
-    def __init__(self, file):
-        return self
-
-    def writeListOfDoctorsToFile(self, file):
-        fid = open('Doctors.txt', 'a')
-        for doctors in theDoctors:
-            doctors.addDrToFile(file)
-        fid.close()
-
-    def writeListOfFacilitiesToFile(self, file):
-        fid2 = open('Facilities.txt', 'a')
-        for facilities in theFacilities:
-            facilities.addFacilityToFile(file)
-        fid2.close()
-    
-    def writeListOfLabsToFile(self, file):
-        fid3 = open('Laboratory.txt', 'a')
-        for laboratories in theLabs:
-            laboratories.addLabToFile(file)
-        fid3.close()
-
-    def writeListOfPatientsToFile(self, file):
-        fid4 = open('Patients.txt','a')
-        for patients in thePatients:
-            patients.addPatientToFile(file)
-        fid4.close()
+run_obj = Menu()
+run_obj.Display_Menu()
 
 # Clears the file from any existing data so you can put more in
-file0 = "Doctor.txt"
-fid = open(file0, 'w')
-fid.close()
-
-# Initalizes theDoctors variable for the functions to use
-theDoctors = [Doctor(369, 'Joey', 'Penis', '8:00-8:00', 'Harvard', 69), Doctor(370, 'Janet', 'Butthole', '9:00-9:00', 'Oxford', 70)]
-
-# Clears the file from any existing data so you can put more in
-file2 = "Facilities.txt"
-fid2 = open(file2, 'w')
-fid2.close()
-
-# Initalizes theFacilities variable for the functions to use
-theFacilities = [Facility('Hospital '), Facility('Emergency '), Facility('Penis '), Facility('Operating_Room')]
-
-
-# Clears the file from any existing data so you can put more in
-file3 = "Labs.txt"
-fid3 = open(file3, 'w')
-fid3.close()
-
-# Initalizes theLabs variable for the function
-theLabs = [Laboratory('Lab1', 800), Laboratory('Lab2', 1200)]
-
-file4 = "Patients.txt"
-fid4 = open(file4, 'w')
-fid4.close()
-
-thePatients = [Patient(69, 'Dick', 'Cancer', 'man', 75), Patient(96, 'Jon', 'Cancer', 'man', 45)]
 
 ####################################################################################
-# Writes theDoctors to file0
-docs = Management(theDoctors)
-docs.writeListOfDoctorsTofile(file0)
 
-# Writes theFacilities to file2
-facs = Management(theFacilities)
-facs.writeListOfFacilitiesTofile(file2)
-
-# Writes theLabs to file3
-labs = Management(theLabs)
-labs.writeListOfLabsTofile(file3)
-
-# Writes thePatients to file4
-pats = Management(thePatients)
-pats.writeListOfPatientsTofile(file4)
-
-###########################################################
-
-# Display info to the user
-laboratory = Laboratory('Lab3', 450)
-laboratory.displayLabsList(file3)
-
-facilities = Facility('Dining room')
-facilities.displayFacilityList(file2)
-
-##############################################################
-
-# Asks user to input info
-labInfo = Laboratory('Lab4', 500)
-labInfo.enterLabInfo(file3)
